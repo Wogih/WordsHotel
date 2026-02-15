@@ -1,65 +1,72 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+import Header from "@/components/Header";
+import Image from "next/image";
+import {objects, Translations} from "@/lib/db";
+import {useLanguage} from "@/context/LanguageContext";
+import { useState } from "react";
+
+export default function Page() {
+    const {getLanguage} = useLanguage();
+    const [activeTooltip, setActiveTooltip] = useState<number | null>(null);
+
+    return (
+        <>
+            <Header />
+            <main className={"flex flex-col mx-6 mt-4"}>
+                <section>
+                    <div className={"flex h-auto justify-center relative"}>
+                        <Image
+                            src={"/objects/room.png"}
+                            width={1089}
+                            height={653}
+                            alt={"room"}
+                            className={"w-3/5 max-sm:w-full"}
+                        />
+                        {objects.map((object, index) => {
+                            const objectName = Translations({
+                                key: `words.${object.objectName}`,
+                                language: getLanguage("learn")
+                            });
+
+                            return (
+                                <div
+                                    key={index}
+                                    className={`absolute ${object.classes} group`}
+                                    onMouseEnter={() => setActiveTooltip(index)}
+                                    onMouseLeave={() => setActiveTooltip(null)}
+                                >
+                                    <button
+                                        onClick={() => alert(`Информация о ${objectName}`)}
+                                        className="p-0 border-none bg-transparent cursor-pointer w-full"
+                                    >
+                                        <Image
+                                            src={`/objects/${object.objectName}.png`}
+                                            width={object.width}
+                                            height={object.height}
+                                            alt={objectName}
+                                            className={"w-full h-auto scale-100 hover:scale-105 transition-all duration-200"}
+                                        />
+                                    </button>
+
+                                    {activeTooltip === index && (
+                                        <div
+                                            className={`
+                                                absolute bottom-full left-1/2 transform 
+                                                -translate-x-1/2 mb-2 px-3 py-2 bg-(--custom-red) 
+                                                text-white text-sm rounded z-90 whitespace-nowrap
+                                            `}
+                                        >
+                                            <p>{objectName}</p>
+                                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
+                                        </div>
+                                    )}
+                                </div>
+                            )
+                        })}
+                    </div>
+                </section>
+            </main>
+        </>
+    )
 }
