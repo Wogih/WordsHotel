@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useLanguage} from "@/context/LanguageContext";
 import Image from "next/image";
 import {Language, TypeLanguage} from "@/types/language";
+import {allLanguages} from "@/lib/db";
 
 interface LanguageSelectionProps {
     type: TypeLanguage;
@@ -10,7 +11,6 @@ interface LanguageSelectionProps {
 export default function LanguageSelection({type}: LanguageSelectionProps) {
     const { getLanguage, setLanguageAndSave } = useLanguage()
     const [isOpen, setIsOpen] = useState(false)
-    const languages: Language[] = ['ru', 'en', 'zh']
 
     const handleLanguageChange = (lang: Language) => {
         if (lang === getLanguage(type)) {
@@ -42,7 +42,7 @@ export default function LanguageSelection({type}: LanguageSelectionProps) {
                     : 'opacity-0 md:translate-x-4 max-sm:-translate-y-4 pointer-events-none'}
                 `}
             >
-                {languages.filter((lang: Language) => lang !== getLanguage(type)).map((lang: Language, index: number) => (
+                {allLanguages.filter((lang: Language) => lang !== getLanguage(type)).map((lang: Language, index: number) => (
                     <Image
                         key={index}
                         src={`/flags/flag-${lang}.png`}

@@ -1,6 +1,6 @@
 export type Room = "room" | "bathroom";
 
-export interface Words_objects{
+export interface WordsObjects {
     id: number;
     objectName: string;
     room: Room;
@@ -13,11 +13,16 @@ export interface Words_objects{
 export interface Word {
     id: number;
     name: string;
+    image: string;
+    imageWidth: number;
+    imageHeight: number;
+    transcript: string;
+    spellingGif: string[];
 }
 
 export interface Rooms {
     id: number;
-    name: string;
+    name: Room;
     width: number;
     height: number;
 }
