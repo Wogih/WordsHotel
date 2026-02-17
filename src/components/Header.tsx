@@ -15,7 +15,7 @@ export default function Header() {
 
     return (
         <nav>
-            <header className={"max-sm:hidden w-screen h-16 bg-(--custom-red) text-gray-300 flex justify-between"}>
+            <header className={"max-sm:hidden w-screen h-16 bg-(--main-color) text-gray-300 flex justify-between"}>
                 <div className={"flex items-center gap-3"}>
                     {pages.map((page, index) => (
                         <button
@@ -33,7 +33,7 @@ export default function Header() {
                     <LanguageSelection type={"learn"} />
                 </div>
             </header>
-            <header className={"sm:hidden w-screen h-16 bg-(--custom-red) text-white flex items-center justify-between"}>
+            <header className={"sm:hidden w-screen h-16 bg-(--main-color) text-white flex items-center justify-between"}>
                 <select
                     className={"ml-2 px-4 py-2 text-xl focus:outline-none select-none"}
                     onChange={(e) => {router.push(e.target.value)}}
@@ -42,7 +42,7 @@ export default function Header() {
                     {pages.map((page, index) => (
                         <option
                             key={index}
-                            className={"bg-(--custom-red)"}
+                            className={"bg-(--main-color)"}
                             value={page}
                         >
                             {Translations({key: `route.${page}`, language: getLanguage("main")})}
