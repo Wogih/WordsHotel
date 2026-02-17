@@ -2,12 +2,13 @@
 
 import Header from "@/components/Header";
 import Image from "next/image";
-import {objects, rooms, Translations, words} from "@/lib/db";
+import {objects, rooms, Translations} from "@/lib/db";
 import {useLanguage} from "@/context/LanguageContext";
 import {useEffect, useMemo, useRef, useState} from "react";
 import {Room, WordsObjects} from "@/types/words_objects";
 import Spinner from "@/components/common/loading/Spinner";
-import ImageWithLoader from "@/components/common/loading/ImageWithLoader";
+import PCDetailedPanel from "@/components/pages/rooms/PCDetailedPanel";
+import MobileDetailsPanel from "@/components/pages/rooms/MobileDetailsPanel";
 
 interface HandleObjectData {
     index: number;
@@ -28,8 +29,8 @@ export default function Page() {
     // Состояния для комнат и объектов комнат
     const [activeRoom, setActiveRoom] = useState<Room>("room");
     const [selectedObject, setSelectedObject] = useState<WordsObjects | null>(null)
-    const currentRoomData = rooms.filter(room => room.name === activeRoom);
-    const currentObjectsData = objects.filter(object => object.room === activeRoom);
+    const currentRoomData = useMemo(() => rooms.filter(room => room.name === activeRoom), [activeRoom]);
+    const currentObjectsData = useMemo(() => objects.filter(object => object.room === activeRoom), [activeRoom]);
 
     // Состояния для загрузки изображений
     const [allImagesLoaded, setAllImagesLoaded] = useState(false);
@@ -77,9 +78,9 @@ export default function Page() {
     }
 
     return (
-        <>
+        <div className={"overflow-hidden"}>
             <Header />
-            <main className={"flex flex-col mx-6 mt-4"}>
+            <main className={" flex flex-col mx-6 mt-4 "}>
                 <section className={"flex justify-center mt-4"}>
                     <h1 className={"text-3xl max-sm:text-2xl font-bold"}>{Translations({key: 'page.words.subtitle', language: currentMainLanguage})}</h1>
                 </section>
@@ -176,95 +177,20 @@ export default function Page() {
                             )
                         })}
                     </div>
-                    <div
-                        className={`
-                            max-sm:hidden absolute w-[38%] h-full px-4 py-2 rounded-lg   
-                            top-0 right-0 flex flex-col duration-1000
-                            gap-4 bg-(--second-color)
-                            
-                            transform transition-all
-                            ${selectedObject ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}
-                        `}
-                    >
-                        {selectedObject && (
-                            (() => {
-                                const word = words.find(word => word.id === selectedObject.wordsId);
-                                const showChineseExtras = currentLearnLanguage === 'zh';
-
-                                if (!word) {
-                                    return (
-                                        <>
-                                            <div className="relative flex items-center z-1">
-                                                <button
-                                                    className="bg-(--main-color) text-white px-3 py-1 rounded-md m-auto mr-0"
-                                                    onClick={() => setSelectedObject(null)}
-                                                >
-                                                    X
-                                                </button>
-                                            </div>
-                                            <div className="absolute h-full w-full flex justify-center items-center ">
-                                                <h2>{Translations({key: 'words.error', language: currentMainLanguage})}</h2>
-                                            </div>
-                                        </>
-                                    )
-                                }
-
-                                return (
-                                    <>
-                                        <div className="flex items-center">
-                                            <h2 className={"flex-1 text-center font-bold text-xl"}>
-                                                {Translations({key: `words.${word.name}`, language: currentMainLanguage})}
-                                                {" / "}
-                                                {Translations({key: `words.${word.name}`, language: currentLearnLanguage})}
-                                                {showChineseExtras && ` (${word.transcript})`}
-                                            </h2>
-                                            <button
-                                                className="bg-(--main-color) text-white px-3 py-1 rounded-md m-auto mr-0"
-                                                onClick={() => setSelectedObject(null)}
-                                            >
-                                                X
-                                            </button>
-                                        </div>
-                                        <ImageWithLoader
-                                            src={`/wordsImage/${word.image}.png`}
-                                            alt={word.name}
-                                            width={word.imageWidth}
-                                            height={word.imageHeight}
-                                            className={"h-[25%] mx-auto object-contain"}
-                                        />
-                                        <button
-                                            onClick={() => {
-                                                const audio = new Audio(`/voices/${currentLearnLanguage}/${word.name}.mp3`);
-                                                audio.play().catch(() => alert('Аудио не найдено'));
-                                            }}
-                                            className= {"self-start "}
-                                        >
-                                            🔊 {Translations({key: 'words.listen', language: currentMainLanguage})}
-                                        </button>
-                                        {showChineseExtras && word.spellingGif && word.spellingGif.length > 0 && (
-                                            <div className="flex flex-row gap-4 justify-center items-center h-full w-full">
-                                                {word.spellingGif.map((gif, index) => (
-                                                    <div key={index} className="relative grow shrink-0 basis-0 max-w-[20%] h-auto">
-                                                        <ImageWithLoader
-                                                            src={`/spelling/${gif}.gif`}
-                                                            alt={`${word.name} spelling ${index + 1}`}
-                                                            width={50}
-                                                            height={50}
-                                                            className="object-cover w-full h-full"
-                                                            unoptimized
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </>
-
-                                );
-                            })()
-                        )}
-                    </div>
+                    <PCDetailedPanel
+                        selectedObject={selectedObject}
+                        onClose={() => {setSelectedObject(null)}}
+                        currentMainLanguage={currentMainLanguage}
+                        currentLearnLanguage={currentLearnLanguage}
+                    />
+                    <MobileDetailsPanel
+                        selectedObject={selectedObject}
+                        onClose={() => setSelectedObject(null)}
+                        currentLearnLanguage={currentLearnLanguage}
+                        currentMainLanguage={currentMainLanguage}
+                    />
                 </section>
             </main>
-        </>
+        </div>
     )
 }

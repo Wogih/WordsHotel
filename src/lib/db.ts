@@ -197,6 +197,7 @@ export const words: Word[] = [
     {id: 17, name: "towel", image: "towel1", imageWidth: 200, imageHeight: 200, transcript: "máo jīn", spellingGif: ["towel1", "towel2"]}
 ]
 
+export const wordsMap = new Map(words.map(word => [word.id, word]));
 
 export const rooms: Rooms[] = [
     {
@@ -217,14 +218,14 @@ export function Translations({key, language: lang}: TranslationData): string {
     const translations: Record<string, Record<Language, string>> = {
         // === Routes ===
         'route./': {
-            ru: 'Слова',
-            en: 'Words',
-            zh: '单词'
+            ru: 'Комнаты',
+            en: 'Rooms',
+            zh: '房间'
         },
         'route./spelling': {
-            ru: 'Правописание',
-            en: 'Spelling',
-            zh: '拼写'
+            ru: 'Словарь',
+            en: 'Dictionary',
+            zh: '字典'
         },
         'route./testing': {
             ru: 'Тестирование',
@@ -322,10 +323,16 @@ export function Translations({key, language: lang}: TranslationData): string {
             zh: '毛巾'
         },
 
+        // === Roms messages ===
         'words.error': {
             ru: 'Информация о слове не найдена',
             en: 'Word information not found',
             zh: '单词信息未找到'
+        },
+        'words.notFound': {
+            ru: 'Слово не найдено',
+            en: 'Word not found',
+            zh: '单词未找到'
         },
         'words.listen': {
             ru: 'Проговорить',
