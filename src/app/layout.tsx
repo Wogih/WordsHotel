@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import "./globals.css";
 import {LanguageProvider} from "@/context/LanguageContext";
 import {getLanguageCookie} from "@/context/action";
+import React from "react";
 
-const roboto = Roboto({
-    subsets: ["latin"],
-    weight: ["400", "500", "700"],
-    variable: "--font-roboto",
-});
+
 
 export const metadata: Metadata = {
   title: "Words hotel",
@@ -26,7 +22,7 @@ export default async function RootLayout({
     return (
         <html lang="ru">
             <body
-                className={`${roboto.variable} antialiased bg-(--background)`}
+                className={`antialiased bg-(--background)`}
             >
                 <LanguageProvider initialMainLanguage={mainLanguage} initialLearnLanguage={learnLanguage}>
                     {children}
