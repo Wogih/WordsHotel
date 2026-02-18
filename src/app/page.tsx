@@ -4,11 +4,11 @@ import Header from "@/components/Header";
 import Image from "next/image";
 import {objects, rooms, Translations} from "@/lib/db";
 import {useLanguage} from "@/context/LanguageContext";
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Room, WordsObjects} from "@/types/words_objects";
 import Spinner from "@/components/common/loading/Spinner";
 import PCDetailedPanel from "@/components/pages/rooms/PCDetailedPanel";
-import MobileDetailsPanel from "@/components/pages/rooms/MobileDetailsPanel";
+import {MobileDetailsPanel} from "@/components/pages/rooms/MobileDetailsPanel";
 
 interface HandleObjectData {
     index: number;
@@ -29,17 +29,15 @@ export default function Page() {
     // Состояния для комнат и объектов комнат
     const [activeRoom, setActiveRoom] = useState<Room>("room");
     const [selectedObject, setSelectedObject] = useState<WordsObjects | null>(null)
-    const currentRoomData = useMemo(() => rooms.filter(room => room.name === activeRoom), [activeRoom]);
-    const currentObjectsData = useMemo(() => objects.filter(object => object.room === activeRoom), [activeRoom]);
+    const currentRoomData = rooms.filter(room => room.name === activeRoom);
+    const currentObjectsData = objects.filter(object => object.room === activeRoom);
 
     // Состояния для загрузки изображений
     const [allImagesLoaded, setAllImagesLoaded] = useState(false);
     const loadedImagesCount = useRef(0);
 
     // Счетчик загруженных изображений
-    const totalImagesToLoad = useMemo(() => {
-        return (currentRoomData.length > 0 ? 1 : 0) + currentObjectsData.length;
-    }, [currentRoomData, currentObjectsData]);
+    const totalImagesToLoad = (currentRoomData.length > 0 ? 1 : 0) + currentObjectsData.length;
 
     // Обработчик загрузки одного изображения
     const handleImageLoad = () => {
@@ -131,6 +129,7 @@ export default function Page() {
                                     alt={room.name}
                                     className={"w-3/5 max-sm:w-full max-sm:h-auto rounded-lg"}
                                     onLoad={handleImageLoad}
+                                    priority
                                 />
                             )
                         })}

@@ -3,25 +3,21 @@
 
 import { useState } from 'react';
 import Image, { ImageProps } from 'next/image';
-import Spinner from "@/components/common/loading/Spinner";
+import Spinner, {SpinnerProps} from "@/components/common/loading/Spinner";
 
 interface ImageWithLoaderProps extends ImageProps {
-    spinnerSize?: string;
-    spinnerColor?: string;
+    spinnerProps?: SpinnerProps;
 }
 
 export default function ImageWithLoader({
-                                            alt,
-                                            className = '',
-                                            spinnerSize = "3rem",
-                                            ...props
-                                        }: ImageWithLoaderProps) {
+    alt, className = '', spinnerProps , ...props
+}: ImageWithLoaderProps) {
     const [isLoading, setIsLoading] = useState(true);
 
     return (
         <>
             {isLoading && (
-                <Spinner size={spinnerSize} />
+                <Spinner {...spinnerProps} />
             )}
             <Image
                 alt={alt}

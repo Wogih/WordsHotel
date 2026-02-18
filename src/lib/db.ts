@@ -329,11 +329,6 @@ export function Translations({key, language: lang}: TranslationData): string {
             en: 'Word information not found',
             zh: '单词信息未找到'
         },
-        'words.notFound': {
-            ru: 'Слово не найдено',
-            en: 'Word not found',
-            zh: '单词未找到'
-        },
         'words.listen': {
             ru: 'Проговорить',
             en: 'Pronounce',
