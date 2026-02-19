@@ -110,7 +110,7 @@ export const objects: WordsObjects[] = [
         wordsId: 10,
         width: 94,
         height: 52,
-        classes: "w-[4%] left-[31%] top-[73%] max-sm:w-[6%] max-sm:left-[18%] max-sm:top-[70.5%] z-2"
+        classes: "w-[4%] left-[31%] top-[73%] max-sm:w-[6%] max-sm:left-[18%] max-sm:top-[69%] z-2"
     },
     {
         id: 13,
@@ -128,7 +128,7 @@ export const objects: WordsObjects[] = [
         wordsId: 12,
         width: 43,
         height: 7,
-        classes: "w-[2.5%] left-[27%] top-[74.5%] max-sm:w-[5%] max-sm:left-[12%] max-sm:top-[69.1%] z-1"
+        classes: "w-[2.5%] left-[27%] top-[74.5%] max-sm:w-[4%] max-sm:left-[12%] max-sm:top-[67%] z-1"
     },
     {
         id: 15,
@@ -178,26 +178,181 @@ export const objects: WordsObjects[] = [
 ];
 
 export const words: Word[] = [
-    {id: 1, name: "bed", image: "bed", imageWidth: 300, imageHeight: 300, transcript: "chuáng", spellingGif: ["bed1"]},
-    {id: 2, name: "nightstand", image: "nightstand", imageWidth: 300, imageHeight: 300, transcript: "chuáng tóu guì", spellingGif: ["nightstand1", "nightstand2", "nightstand3"]},
-    {id: 3, name: "lamp", image: "lamp1", imageWidth: 150, imageHeight: 150, transcript: "dèng", spellingGif: ["lamp1"]},
-    {id: 4, name: "wardrobe", image: "wardrobe", imageWidth: 150, imageHeight: 150, transcript: "yī guì", spellingGif: ["wardrobe1", "wardrobe2"]},
-    {id: 5, name: "TV", image: "TV1", imageWidth: 300, imageHeight: 300, transcript: "diàn shì", spellingGif: ["tv1", "tv2"]},
-    {id: 6, name: "mirror", image: "mirror1", imageWidth: 150, imageHeight: 150, transcript: "jìng zǐ", spellingGif: ["mirror1", "mirror2"]},
-    {id: 7, name: "fridge", image: "fridge1", imageWidth: 200, imageHeight: 200, transcript: "bīng xiāng", spellingGif: ["fridge1", "fridge2"]},
-    {id: 8, name: "table", image: "table1", imageWidth: 300, imageHeight: 300, transcript: "zhuō zi", spellingGif: ["table1", "table2"]},
-    {id: 9, name: "window", image: "window1", imageWidth: 200, imageHeight: 200, transcript: "chuāng hù", spellingGif: ["window1", "window2"]},
-    {id: 10, name: "notebook", image: "notebook1", imageWidth: 150, imageHeight: 150, transcript: "bǐ jì běn", spellingGif: ["notebook1", "notebook2", "notebook3"]},
-    {id: 11, name: "chair", image: "chair1", imageWidth: 150, imageHeight: 150, transcript: "yǐ zi", spellingGif: ["chair1", "chair2"]},
-    {id: 12, name: "pen", image: "pen1", imageWidth: 200, imageHeight: 200, transcript: "bǐ", spellingGif: ["pen1"]},
-    {id: 13, name: "toilet", image: "toilet1", imageWidth: 200, imageHeight: 200, transcript: "cè suǒ", spellingGif: ["toilet1", "toilet2"]},
-    {id: 14, name: "bathrobe", image: "bathrobe", imageWidth: 150, imageHeight: 150, transcript: "yù páo", spellingGif: ["bathrobe1", "bathrobe2"]},
-    {id: 15, name: "sink", image: "sink", imageWidth: 300, imageHeight: 300 , transcript: "shuǐ cáng", spellingGif: ["sink1", "sink2"]},
-    {id: 16, name: "bath", image: "bath", imageWidth: 300, imageHeight: 300, transcript: "yù gāng", spellingGif: ["bath1", "bath2"]},
-    {id: 17, name: "towel", image: "towel1", imageWidth: 200, imageHeight: 200, transcript: "máo jīn", spellingGif: ["towel1", "towel2"]}
+    {
+        id: 1,
+        name: "bed",
+        image: "bed",
+        imageWidth: 300,
+        imageHeight: 300,
+        transcript: "chuáng",
+        spellingGif: ["bed1"],
+        room: "room"
+    },
+    {
+        id: 2,
+        name: "nightstand",
+        image: "nightstand",
+        imageWidth: 300,
+        imageHeight: 300,
+        transcript: "chuáng tóu guì",
+        spellingGif: ["nightstand1", "nightstand2", "nightstand3"],
+        room: "room"
+    },
+    {
+        id: 3,
+        name: "lamp",
+        image: "lamp1",
+        imageWidth: 150,
+        imageHeight: 150,
+        transcript: "dèng",
+        spellingGif: ["lamp1"],
+        room: "room"
+    },
+    {
+        id: 4,
+        name: "wardrobe",
+        image: "wardrobe",
+        imageWidth: 150,
+        imageHeight: 150,
+        transcript: "yī guì",
+        spellingGif: ["wardrobe1", "wardrobe2"],
+        room: "room"
+    },
+    {
+        id: 5,
+        name: "TV",
+        image: "TV1",
+        imageWidth: 300,
+        imageHeight: 300,
+        transcript: "diàn shì",
+        spellingGif: ["tv1", "tv2"],
+        room: "room"
+    },
+    {
+        id: 6,
+        name: "mirror",
+        image: "mirror1",
+        imageWidth: 150,
+        imageHeight: 150,
+        transcript: "jìng zǐ",
+        spellingGif: ["mirror1", "mirror2"],
+        room: "room"
+    },
+    {
+        id: 7,
+        name: "fridge",
+        image: "fridge1",
+        imageWidth: 200,
+        imageHeight: 200,
+        transcript: "bīng xiāng",
+        spellingGif: ["fridge1", "fridge2"],
+        room: "room"
+    },
+    {
+        id: 8,
+        name: "table",
+        image: "table1",
+        imageWidth: 300,
+        imageHeight: 300,
+        transcript: "zhuō zi",
+        spellingGif: ["table1", "table2"],
+        room: "room"
+    },
+    {
+        id: 9,
+        name: "window",
+        image: "window1",
+        imageWidth: 200,
+        imageHeight: 200,
+        transcript: "chuāng hù",
+        spellingGif: ["window1", "window2"],
+        room: "room"
+    },
+    {
+        id: 10,
+        name: "notebook",
+        image: "notebook1",
+        imageWidth: 150,
+        imageHeight: 150,
+        transcript: "bǐ jì běn",
+        spellingGif: ["notebook1", "notebook2", "notebook3"],
+        room: "room"
+    },
+    {
+        id: 11,
+        name: "chair",
+        image: "chair1",
+        imageWidth: 150,
+        imageHeight: 150,
+        transcript: "yǐ zi",
+        spellingGif: ["chair1", "chair2"],
+        room: "room"
+    },
+    {
+        id: 12,
+        name: "pen",
+        image: "pen1",
+        imageWidth: 200,
+        imageHeight: 200,
+        transcript: "bǐ",
+        spellingGif: ["pen1"],
+        room: "room"
+    },
+    {
+        id: 13,
+        name: "toilet",
+        image: "toilet1",
+        imageWidth: 200,
+        imageHeight: 200,
+        transcript: "cè suǒ",
+        spellingGif: ["toilet1", "toilet2"],
+        room: "bathroom"
+    },
+    {
+        id: 14,
+        name: "bathrobe",
+        image: "bathrobe",
+        imageWidth: 150,
+        imageHeight: 150,
+        transcript: "yù páo",
+        spellingGif: ["bathrobe1", "bathrobe2"],
+        room: "bathroom"
+    },
+    {
+        id: 15,
+        name: "sink",
+        image: "sink",
+        imageWidth: 300,
+        imageHeight: 300,
+        transcript: "shuǐ cáng",
+        spellingGif: ["sink1", "sink2"],
+        room: "bathroom"
+    },
+    {
+        id: 16,
+        name: "bath",
+        image: "bath",
+        imageWidth: 300,
+        imageHeight: 300,
+        transcript: "yù gāng",
+        spellingGif: ["bath1", "bath2"],
+        room: "bathroom"
+    },
+    {
+        id: 17,
+        name: "towel",
+        image: "towel1",
+        imageWidth: 200,
+        imageHeight: 200,
+        transcript: "máo jīn",
+        spellingGif: ["towel1", "towel2"],
+        room: "bathroom"
+    }
 ]
 
 export const wordsMap = new Map(words.map(word => [word.id, word]));
+export const wordsByRoom = new Map<Rooms["name"], Word[]>();
+
 
 export const rooms: Rooms[] = [
     {
@@ -222,7 +377,7 @@ export function Translations({key, language: lang}: TranslationData): string {
             en: 'Rooms',
             zh: '房间'
         },
-        'route./spelling': {
+        'route./dictionary': {
             ru: 'Словарь',
             en: 'Dictionary',
             zh: '字典'
@@ -347,11 +502,19 @@ export function Translations({key, language: lang}: TranslationData): string {
             zh: '卫生间'
         },
 
+        // === Words text ===
         'page.words.subtitle': {
             ru: 'Выберите объект',
             en: 'Select an object',
             zh: '选择对象'
-        }
+        },
+
+        // === Dictionary text ===
+        'page.dictionary.searchBar': {
+            ru: 'Поиск используя языки:',
+            en: 'Search using languages',
+            zh: '使用语言搜索:'
+        },
     }
 
     return translations[key]?.[lang] || key

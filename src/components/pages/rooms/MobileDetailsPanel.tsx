@@ -1,14 +1,13 @@
 // components/MobileDetailsPanel.tsx
 'use client'
 
-import { WordsObjects } from "@/types/words_objects";
 import ImageWithLoader from "@/components/common/loading/ImageWithLoader";
 import {Translations, wordsMap} from "@/lib/db";
 import {Language} from "@/types/language";
 import {useEffect, useRef, useState} from "react";
 
 interface MobileDetailsPanelProps {
-    selectedObject: WordsObjects | null;
+    selectedObject: number | null;
     onClose: () => void;
     currentLearnLanguage: Language;
     currentMainLanguage: Language;
@@ -22,7 +21,7 @@ export function MobileDetailsPanel(
         currentMainLanguage
     }: MobileDetailsPanelProps
 ) {
-    const [localData, setLocalData] = useState<WordsObjects | null>(selectedObject);
+    const [localData, setLocalData] = useState<number | null>(selectedObject);
     const [isClosing, setIsClosing] = useState<boolean>(false);
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -60,7 +59,7 @@ export function MobileDetailsPanel(
         return null;
     }
 
-    const word = localData ? wordsMap.get(localData.wordsId) : null;
+    const word = localData ? wordsMap.get(localData) : null;
     const showChineseExtras = currentLearnLanguage === 'zh';
     const isVisibleState = isOpen && !isClosing;
 

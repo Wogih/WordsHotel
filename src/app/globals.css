@@ -5,3 +5,10 @@
   --second-color: #f0e8df ;
   --background : #d5d5d5;
 }
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

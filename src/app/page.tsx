@@ -7,13 +7,16 @@ import {useLanguage} from "@/context/LanguageContext";
 import {useEffect, useRef, useState} from "react";
 import {Room, WordsObjects} from "@/types/words_objects";
 import Spinner from "@/components/common/loading/Spinner";
-import PCDetailedPanel from "@/components/pages/rooms/PCDetailedPanel";
+import PCRoomsDetailedPanel from "@/components/pages/rooms/PCRoomsDetailedPanel";
 import {MobileDetailsPanel} from "@/components/pages/rooms/MobileDetailsPanel";
+import ChoosingRoom from "@/components/common/choosingRoom";
 
 interface HandleObjectData {
     index: number;
     object: WordsObjects;
 }
+
+
 
 export default function Page() {
     const {getLanguage} = useLanguage();
@@ -77,34 +80,16 @@ export default function Page() {
 
     return (
         <div className={"overflow-hidden"}>
-            <Header />
+            <Header/>
             <main className={" flex flex-col mx-6 mt-4 "}>
                 <section className={"flex justify-center mt-4"}>
-                    <h1 className={"text-3xl max-sm:text-2xl font-bold"}>{Translations({key: 'page.words.subtitle', language: currentMainLanguage})}</h1>
+                    <h1 className={"text-3xl max-sm:text-2xl font-bold"}>{Translations({
+                        key: 'page.words.subtitle',
+                        language: currentMainLanguage
+                    })}</h1>
                 </section>
                 <section className="flex justify-center gap-4 mt-6">
-                    {rooms.map((room) => {
-                        const roomName = Translations({
-                            key: `rooms.${room.name}`,
-                            language: currentMainLanguage
-                        });
-
-                        return (
-                            <button
-                                key={room.name}
-                                onClick={() => switchRoom(room.name)}
-                                className={`
-                                    px-6 max-sm:px-4 py-3 max-sm:py-2 rounded-lg font-medium transition-all duration-200
-                                    ${activeRoom === room.name
-                                    ? 'bg-(--main-color) text-white shadow-lg scale-110'
-                                    : 'bg-gray-100 text-gray-700'
-                                }
-                                `}
-                            >
-                                {roomName || room.name}
-                            </button>
-                        );
-                    })}
+                    {ChoosingRoom({currentMainLanguage, switchRoom, activeRoom})}
                 </section>
                 <section className={"relative mt-6 "}>
                     <div
@@ -127,7 +112,7 @@ export default function Page() {
                                     width={room.width}
                                     height={room.height}
                                     alt={room.name}
-                                    className={"w-3/5 max-sm:w-full max-sm:h-auto rounded-lg"}
+                                    className={"w-3/5 max-sm:w-full h-auto rounded-lg"}
                                     onLoad={handleImageLoad}
                                     priority
                                 />
@@ -169,21 +154,23 @@ export default function Page() {
                                             `}
                                         >
                                             <p>{objectName}</p>
-                                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-(--main-color)"></div>
+                                            <div
+                                                className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-(--main-color)"></div>
                                         </div>
                                     )}
                                 </div>
                             )
                         })}
                     </div>
-                    <PCDetailedPanel
-                        selectedObject={selectedObject}
+                    <PCRoomsDetailedPanel
+                        selectedObject={selectedObject?.wordsId || null}
                         onClose={() => {setSelectedObject(null)}}
                         currentMainLanguage={currentMainLanguage}
                         currentLearnLanguage={currentLearnLanguage}
+                        className={"w-[38%] h-full top-0 right-0"}
                     />
                     <MobileDetailsPanel
-                        selectedObject={selectedObject}
+                        selectedObject={selectedObject?.wordsId || null}
                         onClose={() => setSelectedObject(null)}
                         currentLearnLanguage={currentLearnLanguage}
                         currentMainLanguage={currentMainLanguage}

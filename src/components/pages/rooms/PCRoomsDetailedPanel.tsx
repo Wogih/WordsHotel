@@ -1,26 +1,27 @@
-import {WordsObjects} from "@/types/words_objects";
 import {Translations, wordsMap} from "@/lib/db";
 import ImageWithLoader from "@/components/common/loading/ImageWithLoader";
 import {Language} from "@/types/language";
 import {useEffect, useRef, useState} from "react";
 
 interface PCDetailedPanelProps {
-    selectedObject: WordsObjects | null;
+    selectedObject: number | null;
     onClose: () => void;
     currentMainLanguage: Language;
     currentLearnLanguage: Language;
+    className?: string;
 }
 
-export default function PCDetailedPanel(
+export default function PCRoomsDetailedPanel(
     {
         selectedObject,
         onClose,
         currentLearnLanguage,
-        currentMainLanguage
+        currentMainLanguage,
+        className
     }: PCDetailedPanelProps
 ) {
     // === Локальные состояния для закрытия ===
-    const [localData, setLocalData] = useState<WordsObjects | null>(selectedObject);
+    const [localData, setLocalData] = useState<number | null>(selectedObject);
     const [isClosing, setIsClosing] = useState(false);
 
     const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +58,7 @@ export default function PCDetailedPanel(
         return null;
     }
 
-    const word = localData ? wordsMap.get(localData.wordsId) : null;
+    const word = localData ? wordsMap.get(localData) : null;
     const showChineseExtras = currentLearnLanguage === 'zh';
     const isVisibleState = isOpen && !isClosing;
 
@@ -65,9 +66,10 @@ export default function PCDetailedPanel(
     return (
         <div
             className={`
-                            hidden sm:flex absolute w-[38%] h-full px-4 py-2 rounded-lg   
-                            top-0 right-0 flex-col duration-1000
-                            gap-4 bg-(--second-color)
+                            hidden sm:flex absolute flex-col duration-1000
+                            gap-4 bg-(--second-color) px-4 py-2 rounded-lg
+                            
+                            ${className}
                             
                             transform transition-all
                             ${isVisibleState ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}

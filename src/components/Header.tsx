@@ -11,7 +11,7 @@ export default function Header() {
     const router = useRouter();
     const {getLanguage} = useLanguage();
 
-    const pages = [ "/", "/spelling", "/testing"]
+    const pages = [ "/", "/dictionary", "/testing"]
 
     return (
         <nav>

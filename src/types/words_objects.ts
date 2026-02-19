@@ -13,6 +13,7 @@ export interface WordsObjects {
 export interface Word {
     id: number;
     name: string;
+    room: Room;
     image: string;
     imageWidth: number;
     imageHeight: number;
