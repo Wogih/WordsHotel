@@ -555,6 +555,11 @@ export function Translations({key, language: lang}: TranslationData): string {
             en: 'Check',
             zh: '检查'
         },
+        'testing.finish': {
+            ru: 'Завершить',
+            en: 'Finish',
+            zh: '完成'
+        },
 
         // === Modes ===
         'mode.text': {
