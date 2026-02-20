@@ -257,7 +257,7 @@ export default function Page() {
 
     // === Основной экран теста ===
     return (
-        <div className="overflow-hidden h-screen bg-(--bg-color) flex flex-col">
+        <div className="h-full overflow-x-hidden bg-(--bg-color) flex flex-col">
             <Header />
             <main className="flex-1 flex flex-col items-center justify-center p-4 max-w-2xl mx-auto w-full">
                 {/* Прогресс бар */}
