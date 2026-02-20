@@ -126,8 +126,9 @@ export default function Page() {
                 </section>
                 <section className="mt-4 relative flex">
                     <div className={`
-                        grid grid-cols-[repeat(auto-fill,minmax(12em,1fr))] gap-4
-                        ml-0 m-auto
+                        grid grid-cols-[repeat(auto-fit,minmax(12em,16em))]
+                        sm:grid-cols-[repeat(auto-fill,minmax(12em,1fr))] gap-4
+                        sm:ml-0 m-auto
                         
                         transition-all duration-1000 
                         ${selectedWord ? 'sm:w-[65%]' : 'sm:w-full'}

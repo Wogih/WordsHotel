@@ -351,7 +351,6 @@ export const words: Word[] = [
 ]
 
 export const wordsMap = new Map(words.map(word => [word.id, word]));
-export const wordsByRoom = new Map<Rooms["name"], Word[]>();
 
 
 export const rooms: Rooms[] = [
@@ -371,6 +370,17 @@ export const rooms: Rooms[] = [
 
 export function Translations({key, language: lang}: TranslationData): string {
     const translations: Record<string, Record<Language, string>> = {
+        'error': {
+            ru: 'Ошибка',
+            en: 'Error',
+            zh: '错误'
+        },
+        'from': {
+            ru: 'из',
+            en: 'from',
+            zh: '来自'
+        },
+
         // === Routes ===
         'route./': {
             ru: 'Комнаты',
@@ -488,6 +498,79 @@ export function Translations({key, language: lang}: TranslationData): string {
             ru: 'Проговорить',
             en: 'Pronounce',
             zh: '发音'
+        },
+
+        'testing.startTest': {
+            ru: 'Начать тест',
+            en: 'Start test',
+            zh: '开始测试'
+        },
+        'testing.testSettings': {
+            ru: 'Настройки теста',
+            en: 'Test settings',
+            zh: '测试设置'
+        },
+        'testing.choseRightWord': {
+            ru: 'Выберите правильное слово',
+            en: 'Select the right word',
+            zh: '选择正确的单词'
+        },
+        'testing.listenAndChoseRightWord': {
+            ru: 'Прослушайте и выберите правильное слово',
+            en: 'Listen and select the right word',
+            zh: '听并选择正确的单词'
+        },
+        'testing.again': {
+            ru: 'Пройти заново',
+            en: 'Try again',
+            zh: '再次尝试'
+        },
+        'testing.back': {
+            ru: 'Меню',
+            en: 'Menu',
+            zh: '菜单'
+        },
+        'testing.next': {
+            ru: 'Следующий',
+            en: 'Next',
+            zh: '下一个'
+        },
+        'testing.testCompleted': {
+            ru: 'Тест завершен!!!',
+            en: 'Test complete!!!',
+            zh: '测试完成!!!'
+        },
+        'testing.youGet': {
+            ru: 'Вы набрали',
+            en: 'You got',
+            zh: '你获得'
+        },
+        'testing.question': {
+            ru: 'вопрос',
+            en: 'question',
+            zh: '问题'
+        },
+        'testing.checkAnswer': {
+            ru: 'Проверить',
+            en: 'Check',
+            zh: '检查'
+        },
+
+        // === Modes ===
+        'mode.text': {
+            ru: 'Текст',
+            en: 'Text',
+            zh: '文字'
+        },
+        'mode.image': {
+            ru: 'Изображение',
+            en: 'Image',
+            zh: '图像'
+        },
+        'mode.audio': {
+            ru: 'Аудио',
+            en: 'Audio',
+            zh: '音频'
         },
 
         // === Rooms ===

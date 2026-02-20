@@ -28,7 +28,7 @@ export default function ChoosingRoom({
                                     px-6 max-sm:px-4 py-3 max-sm:py-2 rounded-lg font-medium transition-all duration-200
                                     ${activeRoom === room.name
                         ? 'bg-(--main-color) text-white shadow-lg scale-110'
-                        : 'bg-(--second-color) text-gray-700'
+                        : 'bg-(--disabled-color) text-(--disabled-text)'
                     }
                                 `}
                 >

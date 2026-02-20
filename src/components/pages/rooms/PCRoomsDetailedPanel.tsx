@@ -2,6 +2,7 @@ import {Translations, wordsMap} from "@/lib/db";
 import ImageWithLoader from "@/components/common/loading/ImageWithLoader";
 import {Language} from "@/types/language";
 import {useEffect, useRef, useState} from "react";
+import {AudioButton} from "@/components/common/audioButton";
 
 interface PCDetailedPanelProps {
     selectedObject: number | null;
@@ -111,15 +112,8 @@ export default function PCRoomsDetailedPanel(
                         height={word.imageHeight}
                         className={"h-[25%] w-auto mx-auto object-contain"}
                     />
-                    <button
-                        onClick={() => {
-                            const audio = new Audio(`/voices/${currentLearnLanguage}/${word.name}.mp3`);
-                            audio.play().catch(() => alert('Аудио не найдено'));
-                        }}
-                        className= {"self-start "}
-                    >
-                        🔊 {Translations({key: 'words.listen', language: currentMainLanguage})}
-                    </button>
+                    <AudioButton word={word} currentLearnLanguage={currentLearnLanguage} currentMainLanguage={currentMainLanguage}/>
+
                     {showChineseExtras && word.spellingGif && word.spellingGif.length > 0 && (
                         <div className="flex flex-row gap-4 justify-center items-center h-full w-full">
                             {word.spellingGif.map((gif, index) => (

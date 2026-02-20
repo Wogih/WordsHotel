@@ -2,8 +2,12 @@
 
 :root {
   --main-color: #6a2e2f;
+  --main-color-no-active: #bfbfbf;
   --second-color: #f0e8df ;
   --background : #d5d5d5;
+
+  --disabled-color: #bfbfbf;
+  --disabled-text: #7a7a7a;
 }
 
 input:focus,
